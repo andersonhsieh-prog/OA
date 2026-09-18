@@ -231,7 +231,7 @@ public class RepairAppFormUtil {
         if(dataJson.containsKey("Details")) {
             dt1Array = getSafeJsonArray(dataJson, "Details");//付款 Details
         }else{
-            if ("StandardApply".equals(bill_type)) {
+            if ("ExchangeRate".equals(bill_type)) {
 
             }else {
                 String ApllyType = getJsonVal(dataJson,"ApllyType");

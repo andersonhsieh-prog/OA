@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="E:/新資料夾/OA/Resin/lib"/>
+	<classpathentry kind="lib" path="E:/新資料夾/OA/ecology/WEB-INF/lib"/>
+	<classpathentry kind="lib" path="E:/新資料夾/OA/classbean"/>
+	<classpathentry kind="output" path="out/production/OA"/>
+</classpath>
