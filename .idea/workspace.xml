@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="02a68046-fcec-49a8-b250-847f565f10b1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/api/nonstandardext/dekra/webservice/server/impl/BillForceOverServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/api/nonstandardext/dekra/webservice/server/impl/BillForceOverServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/api/nonstandardext/dekra/webservice/server/impl/BillFromLamsToOaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/api/nonstandardext/dekra/webservice/server/impl/BillFromLamsToOaServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/api/nonstandardext/dekra/webservice/server/impl/BillStatusServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/api/nonstandardext/dekra/webservice/server/impl/BillStatusServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com/api/nonstandardext/dekra/webservice/server/impl/RepairAppFormUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/api/nonstandardext/dekra/webservice/server/impl/RepairAppFormUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OA/com/api/nonstandardext/dekra/webservice/server/impl/BillFromLamsToOaServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OA/com/api/nonstandardext/dekra/webservice/server/impl/BillFromLamsToOaServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OA/com/api/nonstandardext/dekra/webservice/server/impl/BillStatusServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OA/com/api/nonstandardext/dekra/webservice/server/impl/BillStatusServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OA/com/api/nonstandardext/dekra/webservice/server/impl/RepairAppFormUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OA/com/api/nonstandardext/dekra/webservice/server/impl/RepairAppFormUtil.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

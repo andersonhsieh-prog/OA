@@ -82,6 +82,11 @@ public class BillFromLamsToOaServiceImpl extends BaseBean implements BillFromLam
                 String tableName = logicService.getSystemConfigValue("ExchangeRate_TABLE", rs);
                 RepairAppFormUtil rafuExchangeRate = new RepairAppFormUtil();
                 result = rafuExchangeRate.createWf(bill_type, workflowId, "ExchangeRate", tableName, dataJson, logicService);
+            } else if ("FuelAllowance".equals(bill_type)) { // FuelAllowance
+                String workflowId = logicService.getSystemConfigValue("FuelAllowance_WF_ID", rs);
+                String tableName = logicService.getSystemConfigValue("FuelAllowance_TABLE", rs);
+                RepairAppFormUtil rafuFuelAllowance = new RepairAppFormUtil();
+                result = rafuFuelAllowance.createWf(bill_type, workflowId, "FuelAllowance", tableName, dataJson, logicService);
             } else {
                 result.put("code", "-1");
                 result.put("message", "单据类型有误:"+bill_type);

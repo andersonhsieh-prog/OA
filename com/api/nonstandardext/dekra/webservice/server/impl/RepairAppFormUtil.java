@@ -75,6 +75,14 @@ public class RepairAppFormUtil {
                     result.put("message", "UserId4Payment 不能为空");
                     return result;
                 }
+              }else if ("FuelAllowance".equals(bill_type)) {
+                workcode4Apply = getJsonVal(dataJson, "UserId"); //用户工号
+                writeCusLog(className, "[workcode4Apply:" + workcode4Apply + "]");
+                if ("".equals(workcode4Apply)) {
+                    result.put("code", "-1");
+                    result.put("message", "UserId 不能为空");
+                    return result;
+                }
               } else  {
                 workcode4Apply = getJsonVal(dataJson, "UserId4Apply"); // 用户工号
                 writeCusLog(className, "[workcode4Apply:" + workcode4Apply + "]");

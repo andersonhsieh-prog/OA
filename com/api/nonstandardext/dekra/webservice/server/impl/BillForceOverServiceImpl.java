@@ -39,7 +39,15 @@ public class BillForceOverServiceImpl extends BaseBean implements BillForceOverS
             this.writeLog("---" + SERVICE_NAME + " 参数 billType:" + billType);
             this.writeLog("---" + SERVICE_NAME + " 参数 requestId:" + requestId);
             this.writeLog("---" + SERVICE_NAME + " 参数 operator1:" + operator);
-            if (("Quotation".equals(billType) || "ContractForm".equals(billType) || "ServiceRecord".equals(billType) || "Outsourcing".equals(billType) || "OutsourcingPayment".equals(billType)) && !"".equals(requestId)) {} else {
+            if (("Quotation".equals(billType)
+                    || "ContractForm".equals(billType)
+                    || "ServiceRecord".equals(billType)
+                    || "Outsourcing".equals(billType)
+                    || "OutsourcingPayment".equals(billType)
+                    || "CalibrateMaintainApply".equals(billType)
+                    || "CalibrateMaintainPayment".equals(billType)
+                    || "StandardApply".equals(billType)
+            ) && !"".equals(requestId)) {} else {
                 result.put("code", "-1");
                 result.put("message", "单据类型或者参数无效");
                 return result.toString();
