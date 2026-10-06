@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 /**
- * 流程退回释放预算
+ * 流程退回釋放預算
  */
 public class AssetBudgetReleaseAction4TW extends BaseBean implements Action {
 
@@ -32,7 +32,7 @@ public class AssetBudgetReleaseAction4TW extends BaseBean implements Action {
 			String workflowId = requestInfo.getWorkflowid();
 			int formId = Util.getIntValue(workflowComInfo.getFormId(workflowId), 0);
 			if (formId == 0){
-				return failureInfo(requestInfo, requestId, "表单不存在");
+				return failureInfo(requestInfo, requestId, "表單不存在");
 			}
 			String mainTablename = "formtable_main_" + (formId * -1);
 
@@ -52,7 +52,7 @@ public class AssetBudgetReleaseAction4TW extends BaseBean implements Action {
 			}
 		} catch (Exception e) {
 			this.writeLog(Action_Name + "  exception :" + e.getMessage());
-			return failureInfo(requestInfo, requestId, "异常提示：" + Action_Name +"异常，请联系管理员");
+			return failureInfo(requestInfo, requestId, "異常提示：" + Action_Name +"異常，請聯繫管理員");
 		}
 		return Action.SUCCESS;
 	}
@@ -67,7 +67,7 @@ public class AssetBudgetReleaseAction4TW extends BaseBean implements Action {
 
 	public String doBudgetDt1(String requestId, String mainTablename, String mainId){
 		RecordSet rs = new RecordSet();
-		//汇总当前单据预算使用情况 dt1
+		//匯總當前單據預算使用情況 dt1
 		String budgetSql = "select * from " + mainTablename + "_dt6 where mainId = '" + mainId + "'";
 
 		this.writeLog(Action_Name + "  budgetSql :" + budgetSql);
@@ -81,7 +81,7 @@ public class AssetBudgetReleaseAction4TW extends BaseBean implements Action {
 			if (!"".equals(ysbm)){
 				String ygcgbhsjermb = Util.null2String(rs.getString("ygcgbhsjermb"));
 				if ("".equals(ygcgbhsjermb)){
-					return "金额不能为空";
+					return "金額不能為空";
 				}
 
 				this.writeLog(Action_Name + "  ygcgbhsjermb :" + ygcgbhsjermb);
@@ -94,7 +94,7 @@ public class AssetBudgetReleaseAction4TW extends BaseBean implements Action {
 				this.writeLog(Action_Name + "   ysbm :" + ysbm + "   currentUseBudget :" + currentUseBudget);
 				currentUseBudgetMap.put(ysbm, currentUseBudget);
 			} else {
-				return "预算编码不能为空";
+				return "預算編碼不能為空";
 			}
 		}
 

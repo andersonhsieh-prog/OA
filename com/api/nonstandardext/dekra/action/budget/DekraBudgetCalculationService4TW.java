@@ -16,15 +16,15 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
 
     private final static String SERVICE_NAME = "";
 
-    //volatitle 保证修饰变量在内存中的可见性，与java内存模型配合
-    //volatile关键字能禁止指令重排序，所以volatile能在一定程度上保证有序性
+    //volatitle 保證修飾變量在內存中的可見性，與java內存模型配合
+    //volatile關鍵字能禁止指令重排序，所以volatile能在一定程度上保證有序性
     private volatile static DekraBudgetCalculationService4TW instance = null;
 
     private DekraBudgetCalculationService4TW() {}
 
     public static DekraBudgetCalculationService4TW getInstance(){
         if(instance == null){
-            //保证原子性操作
+            //保證原子性操作
             synchronized (DekraBudgetCalculationService4TW.class){
                 if(instance == null) {
                     instance = new DekraBudgetCalculationService4TW();
@@ -54,13 +54,13 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
                 this.writeLog(SERVICE_NAME + " operatedate is null, " + year + ",month:" + month + ",requestId:" + requestId);
             }
 
-            //插入预算操作表; 预算冻结:1.更新预算冻结金额，2.更新剩余金额
+            //插入預算操作表; 預算凍結:1.更新預算凍結金額，2.更新剩餘金額
             List<List> operationBatchList = new ArrayList<List>();
             List<List> budgetBatchList = new ArrayList<List>();
             String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             this.writeLog(SERVICE_NAME + "  currentDateTime:" + currentDateTime + ", currentUseBudgetMap size:" + currentUseBudgetMap);
 
-            //删除之前冻结的预算
+            //刪除之前凍結的預算
             String opDelSql = "delete from uf_TW_budget_operate where op_workflow='" + requestId + "' and uuid='" + uuid + "'";
             this.writeLog(SERVICE_NAME + " opDelSql:" + opDelSql);
             rs.execute(opDelSql);
@@ -74,9 +74,9 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
                 paramlist.add(currentDateTime.substring(0, 10));
                 paramlist.add(currentDateTime.substring(11));
 
-                paramlist.add(m.getKey()); //预算
+                paramlist.add(m.getKey()); //預算
 
-                //更新前的剩余金额
+                //更新前的剩餘金額
                 String budgetSql = "select * from uf_TW_yskz where zt=0 and id=" + m.getKey();
                 this.writeLog(SERVICE_NAME + "  frozen key:" + m.getKey() + " value:" + m.getValue() + " budgetSql:" + budgetSql);
                 rs.execute(budgetSql);
@@ -93,18 +93,18 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
                     }
                 } else {
                     result.put("code", -100);
-                    result.put("message", "Amount in LC未维护，请联系管理员");
+                    result.put("message", "Amount in LC未維護，請聯繫管理員");
                     return result;
                 }
                 this.writeLog(SERVICE_NAME + " year : " + year + " , month : " + month + ",budgetSql:" + budgetSql);
-                //operation表记录剩余金额
+                //operation表記錄剩餘金額
 
                 paramlist.add(year);
                 paramlist.add(requestId);
                 paramlist.add(requestId);
 
-                paramlist.add(kyje);//冻结前可用金额
-                paramlist.add(m.getValue().toString());//冻结金额
+                paramlist.add(kyje);//凍結前可用金額
+                paramlist.add(m.getValue().toString());//凍結金額
 
                 if (wfCreateTime  == null){
                     paramlist.add(DekraUtil.parseToDateString(Calendar.getInstance().getTime(), DekraUtil.formatYYYYMMDDHHMMSS));
@@ -120,16 +120,16 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
 
                 List<Object> budgetParamlist = new ArrayList<Object>();
 
-                //占用金额
+                //佔用金額
                 BigDecimal forzenFee = getForzenByYsbm(rs, m.getKey(), m.getValue(), year, "0,1", isFrozen);
                 budgetParamlist.add(forzenFee.toString());
 
-                //可用金额
+                //可用金額
                 BigDecimal canUse = new BigDecimal(amountinlc).subtract(forzenFee);
                 budgetParamlist.add(canUse.toString());
                 if (canUse.compareTo(BigDecimal.ZERO) < 0){
                     result.put("code", -105);
-                    result.put("message", "预算可用余额不足，请检查");
+                    result.put("message", "預算可用餘額不足，請檢查");
                     return result;
                 }
                 budgetParamlist.add(m.getKey());
@@ -145,7 +145,7 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
 //            rsTrans.setAutoCommit(true);
             this.writeLog(SERVICE_NAME + "  result :" + result);
 
-            //14个参数
+            //14個參數
             String opInsertSql = "insert into uf_TW_budget_operate (formmodeid, modedatacreater, modedatacreatertype, modedatacreatedate, modedatacreatetime, ysbm, nd, op_workflow, op_requestid, before_frozen, frozen_fee, frozen_time, zt, uuid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             this.writeLog(SERVICE_NAME + " v2 opInsertSql :" + opInsertSql);
             boolean iR = rs.executeBatchSql(opInsertSql, operationBatchList);
@@ -162,14 +162,14 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
             this.writeLog(SERVICE_NAME + " forzen exception message :" + e.getMessage());
             e.printStackTrace();
             result.put("code", -5);
-            result.put("message", "预算扣减异常，请联系管理员 " + e.getMessage());
+            result.put("message", "預算扣減異常，請聯繫管理員 " + e.getMessage());
             return result;
         }
         return result;
     }
 
     /**
-     * 按预算编码统计冻结预算金额
+     * 按預算編碼統計凍結預算金額
      * @param rs
      * @param ysx
      * @param accountIncurred
@@ -191,9 +191,9 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
         this.writeLog(SERVICE_NAME + "  getForzenByMonth forzen:" + forzen);
 
         if (isFrozen){
-            return new BigDecimal(forzen).add(accountIncurred); //加人冻结金额
+            return new BigDecimal(forzen).add(accountIncurred); //加人凍結金額
         } else {
-            return new BigDecimal(forzen); //不加入到预提冻结
+            return new BigDecimal(forzen); //不加入到預提凍結
         }
     }
 
@@ -217,7 +217,7 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
                 this.writeLog(SERVICE_NAME + " operatedate is null, " + year + ",month:" + month + ",requestId:" + requestId);
             }
 
-            //删除操作记录; 预算释放:1.更新预算冻结金额，2.更新剩余金额
+            //刪除操作記錄; 預算釋放:1.更新預算凍結金額，2.更新剩餘金額
             List<List> operationBatchList = new ArrayList<List>();
             List<List> budgetBatchList = new ArrayList<List>();
             String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -231,13 +231,13 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
                     realseFee = BigDecimal.ZERO;
                 }
 
-                //删除参数
+                //刪除參數
                 List<Object> paramlist = new ArrayList<Object>();
                 paramlist.add(requestId);
                 paramlist.add(uuid);
                 operationBatchList.add(paramlist);
 
-                //更新前的剩余金额
+                //更新前的剩餘金額
                 String budgetSql = "select * from uf_TW_yskz where zt=0 and id=" + m.getKey();
                 this.writeLog(SERVICE_NAME + "  frozen key:" + m.getKey() + " value:" + m.getValue() + " budgetSql:" + budgetSql);
                 rs.execute(budgetSql);
@@ -253,11 +253,11 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
 
                 List<Object> budgetParamlist = new ArrayList<Object>();
 
-                //冻结金额
+                //凍結金額
                 BigDecimal forzenFee = getForzenByYsbm(rs, m.getKey(), realseFee.multiply(new BigDecimal("-1")), year, "0,1", true);
                 budgetParamlist.add(forzenFee.toString());
 
-                //可用金额
+                //可用金額
                 budgetParamlist.add(new BigDecimal(amountinlc).subtract(forzenFee).toString());
 
                 budgetParamlist.add(m.getKey());
@@ -286,7 +286,7 @@ public class DekraBudgetCalculationService4TW extends BaseBean {
             this.writeLog(SERVICE_NAME + " release exception message :" + e.getMessage());
             e.printStackTrace();
             result.put("code", -105);
-            result.put("message", "预算扣减异常，请联系管理员,Message:" + e.getMessage());
+            result.put("message", "預算扣減異常，請聯繫管理員,Message:" + e.getMessage());
             return result;
         }
         return result;

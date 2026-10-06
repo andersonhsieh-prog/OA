@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * 流程归档时，更改预算使用状态
+ * 流程歸檔時，更改預算使用狀態
  */
 public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 
@@ -31,7 +31,7 @@ public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 			String workflowId = requestInfo.getWorkflowid();
 			int formId = Util.getIntValue(workflowComInfo.getFormId(workflowId), 0);
 			if (formId == 0){
-				return failureInfo(requestInfo, requestId, "表单不存在");
+				return failureInfo(requestInfo, requestId, "表單不存在");
 			}
 			String mainTablename = "formtable_main_" + (formId * -1);
 
@@ -52,7 +52,7 @@ public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 			}
 		} catch (Exception e) {
 			this.writeLog(Action_Name + "  exception :" + e.getMessage());
-			return failureInfo(requestInfo, requestId, "异常提示：" + Action_Name +"异常，请联系管理员");
+			return failureInfo(requestInfo, requestId, "異常提示：" + Action_Name +"異常，請聯繫管理員");
 		}
 		return Action.SUCCESS;
 	}
@@ -67,7 +67,7 @@ public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 
 	public String doBudgetDt1(String requestId, String mainTablename, String mainId, String wfCreateTime){
 		RecordSet rs = new RecordSet();
-		//汇总当前单据预算使用情况 dt1
+		//匯總當前單據預算使用情況 dt1
 		String budgetSql = "select * from " + mainTablename + "_dt6 where mainId = '" + mainId + "'";
 		this.writeLog(Action_Name + "  budgetSql :" + budgetSql);
 		rs.execute(budgetSql);
@@ -95,16 +95,16 @@ public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 			if (!"".equals(ysbm)){
 				String ygcgbhsjermb = Util.null2String(rs.getString("ygcgbhsjermb"));
 				if ("".equals(ygcgbhsjermb)){
-					return "预估采购不含税金额不能为空";
+					return "預估採購不含稅金額不能為空";
 				}
 
 				this.writeLog(Action_Name + "  ygcgbhsjermb :" + ygcgbhsjermb);
 
 				String bccgbhsjermb = Util.null2String(rs.getString("bccgbhsjermb"));
 				if ("".equals(bccgbhsjermb)){
-					return "本次采购不含税金额不能为空";
+					return "本次採購不含稅金額不能為空";
 				}
-				this.writeLog(Action_Name + "  line :" + line + "  预估采购金额 :" + ygcgbhsjermb + "  实际采购金额 :" + bccgbhsjermb);
+				this.writeLog(Action_Name + "  line :" + line + "  預估採購金額 :" + ygcgbhsjermb + "  實際採購金額 :" + bccgbhsjermb);
 				BigDecimal currentUseBudget = currentUseBudgetMap.get(ysbm);
 				if (currentUseBudget == null){
 					currentUseBudget = new BigDecimal(bccgbhsjermb);
@@ -114,11 +114,11 @@ public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 				this.writeLog(Action_Name + "   ysbm :" + ysbm + "   currentUseBudget :" + currentUseBudget);
 				currentUseBudgetMap.put(ysbm, currentUseBudget);
 			} else {
-				return "预算编码不能为空";
+				return "預算編碼不能為空";
 			}
 		}
 
-		//更新UUID和行号，UUID用于预算操作，行号用于单据关联
+		//更新UUID和行號，UUID用於預算操作，行號用於單據關聯
 		rs.executeBatchSql("update " + mainTablename + "_dt6 set uuid=?, line=? where id = ?", batchParamList);
 
 		DekraLogicService logicService = new DekraLogicService();
@@ -134,7 +134,7 @@ public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 			if (result.getInt("code") < 0){
 				return result.getString("message");
 			}
-			//赋权
+			//賦權
 			String ufSql = "select id from uf_TW_budget_operate where op_workflow=" + requestId + " and uuid='" + uuid + "'";
 			rs.execute(ufSql);
 			while (rs.next()){
