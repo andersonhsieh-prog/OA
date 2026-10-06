@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class AssetBudgetReleaseAction4TW extends BaseBean implements Action {
 
-	private final static String Action_Name = " AssetBudgetReleaseAction ";
+	private final static String Action_Name = " AssetBudgetReleaseAction4TW ";
 
 	@Override
 	public String execute(RequestInfo requestInfo) {

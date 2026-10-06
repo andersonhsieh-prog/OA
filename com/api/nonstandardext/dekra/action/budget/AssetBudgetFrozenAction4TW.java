@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class AssetBudgetFrozenAction4TW extends BaseBean implements Action {
 
-	private final static String Action_Name = " AssetBudgetFrozenAction ";
+	private final static String Action_Name = " AssetBudgetFrozenAction4TW ";
 
 	@Override
 	public String execute(RequestInfo requestInfo) {

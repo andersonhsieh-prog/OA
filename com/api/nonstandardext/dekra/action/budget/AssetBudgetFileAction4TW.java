@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 
-	private final static String Action_Name = " AssetBudgetFileAction ";
+	private final static String Action_Name = " AssetBudgetFileAction4TW ";
 
 	@Override
 	public String execute(RequestInfo requestInfo) {
