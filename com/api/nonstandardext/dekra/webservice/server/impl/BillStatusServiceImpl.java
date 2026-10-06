@@ -77,7 +77,7 @@ public class BillStatusServiceImpl extends BaseBean implements BillStatusService
 
                 tableName = logicService.getSystemConfigValue("ExchangeRate_TABLE", rs);
 
-            }  else if ("FuelAllowance".equals(billType) && !"".equals(requestId)) {// ExchangeRate
+            }  else if ("FuelAllowance".equals(billType) && !"".equals(requestId)) {// FuelAllowance
 
                 tableName = logicService.getSystemConfigValue("FuelAllowance_TABLE", rs);
 
