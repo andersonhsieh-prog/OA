@@ -116,9 +116,9 @@ public class AssetBudgetFrozenAction4TW extends BaseBean implements Action {
 		rs.executeBatchSql("update " + mainTablename + "_dt6 set uuid=?, line=? where id = ?", batchParamList);
 
 		DekraLogicService logicService = new DekraLogicService();
-		String modeId = logicService.getSystemConfigValue("Budget_Operation_Modeid", rs);
+		String modeId = logicService.getSystemConfigValue("Budget_Operation_Modeid_TW", rs);
 		if ("".equals(modeId)){
-			modeId = "77";
+			modeId = "106";
 		}
 
 		this.writeLog(Action_Name + "  currentUseBudgetMap.size() :" + currentUseBudgetMap.size() + "  modeId:" + modeId);
