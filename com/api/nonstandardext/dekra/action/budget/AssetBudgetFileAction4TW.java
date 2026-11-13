@@ -123,14 +123,17 @@ public class AssetBudgetFileAction4TW extends BaseBean implements Action {
 
 		DekraLogicService logicService = new DekraLogicService();
 		String modeId = logicService.getSystemConfigValue("Budget_Operation_Modeid_TW", rs);
-		if ("".equals(modeId)){
-			modeId = "106";
-		}
+        if ("".equals(modeId)){
+            modeId = "77";
+        }
+        this.writeLog( "modeId :" + modeId);
 
 		this.writeLog(Action_Name + "  currentUseBudgetMap.size() :" + currentUseBudgetMap.size() + "  modeId:" + modeId);
 		if (currentUseBudgetMap.size() > 0){
 			DekraBudgetCalculationService4TW calculation = DekraBudgetCalculationService4TW.getInstance();
 			JSONObject result = calculation.frozen(modeId, requestId, uuid, currentUseBudgetMap, true, wfCreateTime);
+
+            this.writeLog(Action_Name + " result :" + result);
 			if (result.getInt("code") < 0){
 				return result.getString("message");
 			}

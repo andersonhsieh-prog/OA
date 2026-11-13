@@ -47,40 +47,34 @@ public class BillStatusServiceImpl extends BaseBean implements BillStatusService
             String tableName = "";
             if ("Quotation".equals(billType) && !"".equals(requestId)) {
                 tableName = logicService.getSystemConfigValue("Quotation_TABLE", rs);
-
             } else if ("ContractForm".equals(billType) && !"".equals(requestId)) {
                 tableName = logicService.getSystemConfigValue("ContractForm_TABLE", rs);
-
             } else if ("ServiceRecord".equals(billType) && !"".equals(requestId)) {
                 tableName = logicService.getSystemConfigValue("ServiceRecord_TABLE", rs);
-
             } else if ("Outsourcing".equals(billType) && !"".equals(requestId)) {
                 tableName = logicService.getSystemConfigValue("Outsourcing_TABLE", rs);
-
             } else if ("OutsourcingPayment".equals(billType) && !"".equals(requestId)) {
-
                 tableName = logicService.getSystemConfigValue("Outsourcing_Payment_TABLE", rs);
-
             } else if ("CalibrateMaintainApply".equals(billType) && !"".equals(requestId)) {
-
                 tableName = logicService.getSystemConfigValue("RepairAppForm_TABLE", rs);
-
             } else if ("CalibrateMaintainPayment".equals(billType) && !"".equals(requestId)) {
-
                 tableName = logicService.getSystemConfigValue("CalibrateMaintainPayment_TABLE", rs);
-
             }  else if ("StandardApply".equals(billType) && !"".equals(requestId)) {// 新增法規標準
-
                 tableName = logicService.getSystemConfigValue("StandardApply_TABLE", rs);
-
             }  else if ("ExchangeRate".equals(billType) && !"".equals(requestId)) {// ExchangeRate
-
                 tableName = logicService.getSystemConfigValue("ExchangeRate_TABLE", rs);
-
             }  else if ("FuelAllowance".equals(billType) && !"".equals(requestId)) {// FuelAllowance
-
                 tableName = logicService.getSystemConfigValue("FuelAllowance_TABLE", rs);
-
+            } else if ("AdvancePayment".equals(billType)) { // AdvancePayment
+                tableName = logicService.getSystemConfigValue("AdvancePayment_TABLE", rs);
+            } else if ("AdvancePaymentOffset".equals(billType)) { // AdvancePaymentOffset
+                tableName = logicService.getSystemConfigValue("AdvancePaymentOffset_TABLE", rs);
+            } else if ("ClearSalesOrder".equals(billType)) { // ClearSalesOrder
+                tableName = logicService.getSystemConfigValue("ClearSalesOrder_TABLE", rs);
+            } else if ("ModifyItemAmount".equals(billType)) { // ModifyItemAmount
+                tableName = logicService.getSystemConfigValue("ModifyItemAmount_TABLE", rs);
+            } else if ("CancelProject".equals(billType)) { // CancelProject
+                tableName = logicService.getSystemConfigValue("CancelProject_TABLE", rs);
             } else {
                 result.put("code", "-1");
                 result.put("message", "单据类型无效");

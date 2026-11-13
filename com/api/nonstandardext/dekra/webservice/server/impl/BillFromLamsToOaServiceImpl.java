@@ -87,6 +87,31 @@ public class BillFromLamsToOaServiceImpl extends BaseBean implements BillFromLam
                 String tableName = logicService.getSystemConfigValue("FuelAllowance_TABLE", rs);
                 RepairAppFormUtil rafuFuelAllowance = new RepairAppFormUtil();
                 result = rafuFuelAllowance.createWf(bill_type, workflowId, "FuelAllowance", tableName, dataJson, logicService);
+            } else if ("AdvancePayment".equals(bill_type)) { // AdvancePayment
+                String workflowId = logicService.getSystemConfigValue("AdvancePayment_WF_ID", rs);
+                String tableName = logicService.getSystemConfigValue("AdvancePayment_TABLE", rs);
+                RepairAppFormUtil rafuAdvancePayment = new RepairAppFormUtil();
+                result = rafuAdvancePayment.createWf(bill_type, workflowId, "AdvancePayment", tableName, dataJson, logicService);
+            } else if ("AdvancePaymentOffset".equals(bill_type)) { // AdvancePaymentOffset
+                String workflowId = logicService.getSystemConfigValue("AdvancePaymentOffset_WF_ID", rs);
+                String tableName = logicService.getSystemConfigValue("AdvancePaymentOffset_TABLE", rs);
+                RepairAppFormUtil rafuAdvancePaymentOffset = new RepairAppFormUtil();
+                result = rafuAdvancePaymentOffset.createWf(bill_type, workflowId, "AdvancePaymentOffset", tableName, dataJson, logicService);
+            } else if ("ClearSalesOrder".equals(bill_type)) { // ClearSalesOrder
+                String workflowId = logicService.getSystemConfigValue("ClearSalesOrder_WF_ID", rs);
+                String tableName = logicService.getSystemConfigValue("ClearSalesOrder_TABLE", rs);
+                RepairAppFormUtil rafuClearSalesOrder = new RepairAppFormUtil();
+                result = rafuClearSalesOrder.createWf(bill_type, workflowId, "ClearSalesOrder", tableName, dataJson, logicService);
+            } else if ("ModifyItemAmount".equals(bill_type)) { // ModifyItemAmount
+                String workflowId = logicService.getSystemConfigValue("ModifyItemAmount_WF_ID", rs);
+                String tableName = logicService.getSystemConfigValue("ModifyItemAmount_TABLE", rs);
+                RepairAppFormUtil rafuModifyItemAmount = new RepairAppFormUtil();
+                result = rafuModifyItemAmount.createWf(bill_type, workflowId, "ModifyItemAmount", tableName, dataJson, logicService);
+            } else if ("CancelProject".equals(bill_type)) { // CancelProject
+                String workflowId = logicService.getSystemConfigValue("CancelProject_WF_ID", rs);
+                String tableName = logicService.getSystemConfigValue("CancelProject_TABLE", rs);
+                RepairAppFormUtil rafuCancelProject = new RepairAppFormUtil();
+                result = rafuCancelProject.createWf(bill_type, workflowId, "CancelProject", tableName, dataJson, logicService);
             } else {
                 result.put("code", "-1");
                 result.put("message", "单据类型有误:"+bill_type);

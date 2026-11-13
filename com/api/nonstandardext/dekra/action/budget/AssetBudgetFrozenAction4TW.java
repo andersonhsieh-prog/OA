@@ -118,8 +118,9 @@ public class AssetBudgetFrozenAction4TW extends BaseBean implements Action {
 		DekraLogicService logicService = new DekraLogicService();
 		String modeId = logicService.getSystemConfigValue("Budget_Operation_Modeid_TW", rs);
 		if ("".equals(modeId)){
-			modeId = "106";
+			modeId = "77";
 		}
+        this.writeLog( "modeId :" + modeId);
 
 		this.writeLog(Action_Name + "  currentUseBudgetMap.size() :" + currentUseBudgetMap.size() + "  modeId:" + modeId);
 		if (currentUseBudgetMap.size() > 0){

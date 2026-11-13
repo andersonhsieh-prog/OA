@@ -8,7 +8,7 @@ import weaver.general.BaseBean;
 import weaver.general.Util;
 import weaver.workflow.webservices.WorkflowService;
 import weaver.workflow.webservices.WorkflowServiceImpl;
-import java.util.Base64;
+
 /**
  * Lams单据强制归档
  */
@@ -39,15 +39,21 @@ public class BillForceOverServiceImpl extends BaseBean implements BillForceOverS
             this.writeLog("---" + SERVICE_NAME + " 参数 billType:" + billType);
             this.writeLog("---" + SERVICE_NAME + " 参数 requestId:" + requestId);
             this.writeLog("---" + SERVICE_NAME + " 参数 operator1:" + operator);
-            if (("Quotation".equals(billType)
-                    || "ContractForm".equals(billType)
-                    || "ServiceRecord".equals(billType)
-                    || "Outsourcing".equals(billType)
-                    || "OutsourcingPayment".equals(billType)
-                    || "CalibrateMaintainApply".equals(billType)
-                    || "CalibrateMaintainPayment".equals(billType)
-                    || "StandardApply".equals(billType)
-            ) && !"".equals(requestId)) {} else {
+      if (("Quotation".equals(billType)
+              || "ContractForm".equals(billType)
+              || "ServiceRecord".equals(billType)
+              || "Outsourcing".equals(billType)
+              || "OutsourcingPayment".equals(billType)
+              || "CalibrateMaintainApply".equals(billType)
+              || "CalibrateMaintainPayment".equals(billType)
+              || "StandardApply".equals(billType)
+              || "AdvancePayment".equals(billType)
+              || "AdvancePaymentOffset".equals(billType)
+              || "ClearSalesOrder".equals(billType)
+              || "ModifyItemAmount".equals(billType)
+              || "CancelProject".equals(billType))
+          && !"".equals(requestId)) {
+      } else {
                 result.put("code", "-1");
                 result.put("message", "单据类型或者参数无效");
                 return result.toString();
@@ -94,6 +100,16 @@ public class BillForceOverServiceImpl extends BaseBean implements BillForceOverS
                 tableName = logicService.getSystemConfigValue("CalibrateMaintainPayment_TABLE", rs);
             } else if ("StandardApply".equals(billType) && !"".equals(requestId)) {
                 tableName = logicService.getSystemConfigValue("StandardApply_TABLE", rs);
+      } else if ("AdvancePayment".equals(billType) && !"".equals(requestId)) {
+        tableName = logicService.getSystemConfigValue("AdvancePayment_TABLE", rs);
+      } else if ("AdvancePaymentOffset".equals(billType) && !"".equals(requestId)) {
+        tableName = logicService.getSystemConfigValue("AdvancePaymentOffset_TABLE", rs);
+      } else if ("ClearSalesOrder".equals(billType) && !"".equals(requestId)) {
+        tableName = logicService.getSystemConfigValue("ClearSalesOrder_TABLE", rs);
+      } else if ("ModifyItemAmount".equals(billType) && !"".equals(requestId)) {
+        tableName = logicService.getSystemConfigValue("ModifyItemAmount_TABLE", rs);
+      } else if ("CancelProject".equals(billType) && !"".equals(requestId)) {
+        tableName = logicService.getSystemConfigValue("CancelProject_TABLE", rs);
             }
             if ("".equals(tableName)) {
                 result.put("code", "-1");
